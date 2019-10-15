@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment_jenkins
+  namespace: jenkins
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: jenkinsapp
+  template:
+    metadata:
+      labels:
+        app: jenkinsapp
+    spec:
+      containers:
+      - name: jenkinscontainer
+        image: jenkins/jenkins:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+# ---
+# apiVersion: autoscaling/v2beta1
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: autoscalingcsvreader
+#   namespace: csvreader
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1beta1
+#     kind: Deployment
+#     name: deployment-csvreader
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#   - type: Resource
+#     resource:
+#       name: cpu
+#       targetAverageUtilization: 2

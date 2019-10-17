@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment_jenkins
+  name: deploymentjenkins
   namespace: jenkins
 spec:
   replicas: 2
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: jenkinscontainer
-        image: jenkins/jenkins:latest
+        image: jenkins/jenkins
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

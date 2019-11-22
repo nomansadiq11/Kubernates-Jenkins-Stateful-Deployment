@@ -4,7 +4,7 @@ metadata:
   name: deploymentjenkins
   namespace: jenkins
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: jenkinsapp
@@ -16,7 +16,11 @@ spec:
       containers:
       - name: jenkinscontainer
         image: jenkins/jenkins
+        volumeMounts:
+        - name: jenkinsetupfiles
+        mountPath: /data/jenkins
         imagePullPolicy: Always
+      
         ports:
         - containerPort: 8080
 # ---
